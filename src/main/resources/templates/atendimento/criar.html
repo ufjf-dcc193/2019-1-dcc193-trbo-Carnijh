@@ -14,15 +14,17 @@
         <br>
         <form method="POST">
             <div class="form-group">
+                <label for="usuario">Usuário: </label>
                 <select class="custom-select">
-                    <option selected>Escolha uma usuário</option>
-                    <option th:each="usuario : ${usuarios}" name="usuario" th:value="${usuario.nomeCompleto}"></option>
+                    <option selected>Escolha ...</option>
+                    <option th:each="usuario : ${usuarios}" name="usuario" th:value="${usuario.nomeCompleto}"><span th:text="${usuario.nomeCompleto}">Nome completo</span></option>
                 </select>
             </div>
             <div class="form-group">
+                <label for="categoria">Categoria: </label>
                 <select class="custom-select">
-                    <option selected>Escolha uma categoria</option>
-                    <option th:each="categoria : ${categorias}" name="categoria" th:value="${categoria.titulo}"></option>
+                    <option selected>Escolha ...</option>
+                    <option th:each="categoria : ${categorias}" name="categoria" th:value="${categoria.titulo}"><span th:text="${categoria.titulo}">Título</span></option>
                 </select>
             </div>
             <div class="form-group">

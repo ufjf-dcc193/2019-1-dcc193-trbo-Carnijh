@@ -20,13 +20,13 @@ public class HomeController {
     AtendenteRepository atendenteRepo;
 
     // CHAMA TELA INDEX
-    @RequestMapping("/index.html")
+    @RequestMapping({"/", "/index.html"})
     public String login() {
         return "/index.html";
     }
 
     // FAZ LOGIN
-    @RequestMapping(value = "/index.html", method = RequestMethod.POST)
+    @RequestMapping(value = {"/", "/index.html"}, method = RequestMethod.POST)
     public String login(Atendente atendente, HttpSession session) {
         Atendente atendenteAux = atendenteRepo.findByEmail(atendente.getEmail());
         if(atendenteAux != null) {

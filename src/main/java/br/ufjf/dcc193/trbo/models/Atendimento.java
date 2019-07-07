@@ -1,6 +1,5 @@
 package br.ufjf.dcc193.trbo.models;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,8 +18,10 @@ public class Atendimento {
 	private Long id;
 	@ManyToOne
     private Categoria categoria;
-    private Date criacao;
-    private Date fechamento; //opcional
+    private String dataCriacao;
+    private String horaCriacao;
+    private String dataFechamento; //opcional
+    private String horaFechamento; //opcional
 	private String descricao;
 	@ManyToOne
 	private Atendente atendente;
@@ -46,20 +47,37 @@ public class Atendimento {
 		this.categoria = categoria;
 	}
 
-	public Date getCriacao() {
-		return this.criacao;
+	public String getDataCriacao() {
+		return this.dataCriacao;
 	}
 
-	public void setCriacao(Date criacao) {
-		this.criacao = criacao;
+	public void setDataCriacao(String dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
-	public Date getFechamento() {
-		return this.fechamento;
+	public String getHoraCriacao() {
+		return this.horaCriacao;
 	}
 
-	public void setFechamento(Date fechamento) {
-		this.fechamento = fechamento;
+	public void setHoraCriacao(String horaCriacao) {
+		this.horaCriacao = horaCriacao;
+	}
+
+	public String getDataFechamento() {
+		return this.dataFechamento;
+	}
+
+	public void setDataFechamento(String dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+
+	public String getHoraFechamento() {
+		return this.horaFechamento;
+	}
+
+	public void setHoraFechamento(String horaFechamento) {
+		this.horaFechamento = horaFechamento;
 	}
 
 	public String getDescricao() {
