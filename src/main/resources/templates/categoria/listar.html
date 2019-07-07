@@ -23,8 +23,8 @@
                 </thead>
                 <tbody>
                     <tr th:each="categoria : ${categorias}">
-                        <td><span th:text="${categoria.nomeCompleto}">Título</span></td>
-                        <td><span th:text="${categoria.email}">Descrição</span></td>
+                        <td><span th:text="${categoria.titulo}">Título</span></td>
+                        <td><span th:text="${categoria.descricao}">Descrição</span></td>
                         <td><a class="btn btn-dark" th:href="@{/categoria/editar.html/{id}(id=${categoria.id})}" role="button">Editar</a></td>
                         <td><a class="btn btn-dark" th:href="@{/categoria/deletar.html/{id}(id=${categoria.id})}" role="button">Deletar</a></td>
                     </tr>
