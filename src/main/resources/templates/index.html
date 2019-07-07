@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/menu.html">Instituição X</a>
+    </nav>
+    <br>
+    <div class="container">
+        <h1>Login</h1>
+        <br>
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">E-mail: </label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="codigoAcesso">Código de acesso: </label>
+                <input type="password" class="form-control" name="codigoAcesso">
+            </div>
+            <button type="submit" class="btn btn-dark">Entrar</button>
+            <a class="btn btn-dark" th:href="@{/atendente/criar.html" role="button">Cadastrar</a>
+        </form>
+    </div>
+</body>
+
+</html>
