@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" th:with="usuariosCadastrados = ${#lists.isEmpty(usuarios)}">
+        <h1>Lista de Usuários</h1>
+        <div th:if="${usuariosCadastrados}">
+            <p>Não há usuários cadastrados.</p>
+        </div>
+        <div th:unless="${usuariosCadastrados}">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Setor</th>
+                        <th scope="col">Código do vínculo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td><span th:text="${usuario.nomeCompleto}">Nome</span></td>
+                        <td><span th:text="${usuario.email}">E-mail</span></td>
+                        <td><span th:text="${usuario.telefone}">Telefone</span></td>
+                        <td><span th:text="${usuario.celular}">Celular</span></td>
+                        <td><span th:text="${usuario.setor}">Setor</span></td>
+                        <td><span th:text="${usuario.codigoVinculo}">Código do vínculo</span></td>
+                        <td><a class="btn btn-dark" th:href="@{/usuario/editar.html/{id}(id=${usuario.id})}" role="button">Editar</a></td>
+                        <td><a class="btn btn-dark" th:href="@{/usuario/deletar.html/{id}(id=${usuario.id})}" role="button">Deletar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
