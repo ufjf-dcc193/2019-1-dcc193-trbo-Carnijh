@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Categorias</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/menu.html">Instituição X</a>
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/menu.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/atendente/listar.html">Atendentes</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container" th:with="categoriasCadastradas = ${#lists.isEmpty(categorias)}">
+        <h1>Lista de Categorias</h1>
+        <div th:if="${categoriasCadastradas}">
+            <p>Não há categorias cadastrados.</p>
+        </div>
+        <div th:unless="${categoriasCadastradas}">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="categoria : ${categorias}">
+                        <td><span th:text="${categoria.nomeCompleto}">Título</span></td>
+                        <td><span th:text="${categoria.email}">Descrição</span></td>
+                        <td><a class="btn btn-dark" th:href="@{/categoria/editar.html/{id}(id=${categoria.id})}" role="button">Editar</a></td>
+                        <td><a class="btn btn-dark" th:href="@{/categoria/deletar.html/{id}(id=${categoria.id})}" role="button">Deletar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
