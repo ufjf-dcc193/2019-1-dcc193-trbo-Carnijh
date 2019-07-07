@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Atendente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Editar Atendente</h1>
+        <br>
+        <form method="POST">
+            <div class="form-group">
+                <label for="nomeCompleto">Nome completo: </label>
+                <input type="text" class="form-control" name="nomeCompleto" th:value="${atendente.nomeCompleto}">
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label for="telefone">Telefone: </label>
+                    <input type="tel" class="form-control" name="telefone" th:value="${atendente.telefone}">
+                </div>
+                <div class="form-group col">
+                    <label for="celular">Celular: </label>
+                    <input type="tel" class="form-control" name="celular" th:value="${atendente.celular}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail: </label>
+                <input type="email" class="form-control" name="email" th:value="${atendente.email}">
+            </div>
+            <div class="form-group">
+                <label for="setor">Setor: </label>
+                <input type="text" class="form-control" name="setor" th:value="${atendente.setor}">
+            </div>
+            <div class="form-group">
+                <label for="codigoVinculo">Código de vínculo: </label>
+                <input type="text" class="form-control" name="codigoVinculo" th:value="${atendente.codigoVinculo}">
+            </div>
+            <button type="submit" class="btn btn-dark">Editar</button>
+        </form>
+    </div>
+</body>
+
+</html>
