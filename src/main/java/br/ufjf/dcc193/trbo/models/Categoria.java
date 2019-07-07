@@ -1,10 +1,16 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Categoria
  */
+@Entity
 public class Categoria {
-    // título e descrição textual.
+	@Id
+	@GeneratedValue
     private Long id;
     private String titulo;
     private String descricao;

@@ -2,11 +2,20 @@ package br.ufjf.dcc193.trbo.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * Evento
  */
+@Entity
 public class Evento {
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
+	@ManyToOne
     private Atendimento atendimento;
     private Date dataHora;
     private String tipo; // Class tipo ? (entre: abertura, fechamento, alteração de Usuário, alteração de Categoria, alteração de Atendente, alteração de status e uma descrição textual

@@ -1,9 +1,16 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Atendente
  */
+@Entity
 public class Atendente {
+	@Id
+	@GeneratedValue
     private Long id;
     private String nomeCompleto;
     private String codigoAcesso;

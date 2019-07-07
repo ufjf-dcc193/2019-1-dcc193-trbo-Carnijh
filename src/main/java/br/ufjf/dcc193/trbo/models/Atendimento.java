@@ -3,19 +3,32 @@ package br.ufjf.dcc193.trbo.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Atendimento
  */
+@Entity
 public class Atendimento {
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
+	@ManyToOne
     private Categoria categoria;
     private Date criacao;
     private Date fechamento; //opcional
-    private String descricao;
-    private Atendente atendente;
+	private String descricao;
+	@ManyToOne
+	private Atendente atendente;
+	@ManyToOne
     private Usuario usuario; //opcional
     private String status; //Classe status ? (entre: em revisão; aberto; bloqueado; em andamento e fechado)
-    private List<Evento> eventos;
+	@OneToMany
+	private List<Evento> eventos;
 
 	public Long getId() {
 		return this.id;

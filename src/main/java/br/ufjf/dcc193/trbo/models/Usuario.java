@@ -1,10 +1,16 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Usuario
  */
+@Entity
 public class Usuario {
-    // nome completo, setor, código do vínculo, telefone, celular, e-mail.
+	@Id
+	@GeneratedValue
     private Long id;
     private String nomeCompleto;
     private String setor;
