@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class Atendimento {
     private Long id;
-    // private Categoria categoria;
+    private Categoria categoria;
     private Date criacao;
     private Date fechamento; //opcional
     private String descricao;
-    // private Atendente atendente;
-    // private Usuario usuario; //opcional
+    private Atendente atendente;
+    private Usuario usuario; //opcional
     private String status; //Classe status ? (entre: em revisão; aberto; bloqueado; em andamento e fechado)
-    // private List<Eventos> eventos;
+    private List<Evento> eventos;
 
 	public Long getId() {
 		return this.id;
@@ -25,13 +25,13 @@ public class Atendimento {
 		this.id = id;
 	}
 
-	// public Categoria getCategoria() {
-	// 	return this.categoria;
-	// }
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
 
-	// public void setCategoria(Categoria categoria) {
-	// 	this.categoria = categoria;
-	// }
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	public Date getCriacao() {
 		return this.criacao;
@@ -57,21 +57,21 @@ public class Atendimento {
 		this.descricao = descricao;
 	}
 
-	// public Atendente getAtendente() {
-	// 	return this.atendente;
-	// }
+	public Atendente getAtendente() {
+		return this.atendente;
+	}
 
-	// public void setAtendente(Atendente atendente) {
-	// 	this.atendente = atendente;
-	// }
+	public void setAtendente(Atendente atendente) {
+		this.atendente = atendente;
+	}
 
-	// public Usuario getUsuario() {
-	// 	return this.usuario;
-	// }
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
 
-	// public void setUsuario(Usuario usuario) {
-	// 	this.usuario = usuario;
-	// }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public String getStatus() {
 		return this.status;
@@ -81,12 +81,12 @@ public class Atendimento {
 		this.status = status;
 	}
 
-	// public List<Eventos> getEventos() {
-	// 	return this.eventos;
-	// }
+	public List<Evento> getEventos() {
+		return this.eventos;
+	}
 
-	// public void setEventos(List<Eventos> eventos) {
-	// 	this.eventos = eventos;
-	// }
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
 
 }
