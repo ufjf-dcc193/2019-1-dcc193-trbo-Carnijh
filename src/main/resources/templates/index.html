@@ -17,16 +17,18 @@
         <h1>Login</h1>
         <br>
         <form method="POST">
-            <div class="form-group">
+            <div class="form-group col-4">
                 <label for="email">E-mail: </label>
                 <input type="email" class="form-control" name="email">
             </div>
-            <div class="form-group">
+            <div class="form-group col-4">
                 <label for="codigoAcesso">Código de acesso: </label>
                 <input type="password" class="form-control" name="codigoAcesso">
             </div>
-            <button type="submit" class="btn btn-dark">Entrar</button>
-            <a class="btn btn-dark" th:href="@{/atendente/criar.html" role="button">Cadastrar</a>
+            <div class="col-4">
+                <button type="submit" class="btn btn-dark">Entrar</button>
+                <a class="btn btn-dark" th:href="@{/atendente/criar.html}" role="button">Cadastrar</a>
+            </div>
         </form>
     </div>
 </body>

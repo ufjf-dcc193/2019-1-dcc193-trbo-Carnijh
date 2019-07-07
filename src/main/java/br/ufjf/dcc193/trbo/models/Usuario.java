@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,8 @@ public class Usuario {
     private String setor;
     private String codigoVinculo;
     private String telefone;
-    private String celular;
+	private String celular;
+	@Column(nullable=false)
     private String email;
 
 	public Long getId() {

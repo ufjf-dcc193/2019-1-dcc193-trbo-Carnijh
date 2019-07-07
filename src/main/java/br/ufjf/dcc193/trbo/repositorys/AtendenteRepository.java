@@ -12,4 +12,5 @@ import br.ufjf.dcc193.trbo.models.Atendente;
 public interface AtendenteRepository extends JpaRepository<Atendente, Long> {
     List<Atendente> findAll();
     void deleteById(Long id);
+    Atendente findByEmail(String email);
 }

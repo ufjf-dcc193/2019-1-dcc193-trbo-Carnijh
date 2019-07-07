@@ -31,7 +31,7 @@ public class AtendenteController {
     @RequestMapping(value = "/atendente/criar.html", method = RequestMethod.POST)
     public String criar(Atendente atendente) {
         atendenteRepo.save(atendente);
-        return "redirect:/atendente/listar.html";
+        return "redirect:/index.html";
     }
 
     // LISTA ATENDENTES
