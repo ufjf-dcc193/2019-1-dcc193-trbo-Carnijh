@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,5 +42,20 @@ public class AtendenteController {
             model.addAttribute("atendentes", listaAtendentes);
         }
         return "atendente/listar.html";
+    }
+
+    //CHAMA A TELA EDITAR ATENDENTE
+    @RequestMapping(value = "/atendente/editar.html/{id}")
+    public String editar(@PathVariable("id") Long id, Model model) {
+        Atendente atendente = atendenteRepo.findById(id).get();
+        model.addAttribute("atendente", atendente);
+        return "/atendente/editar.html";
+    }
+
+    //EDITA ATENDENTE
+    @RequestMapping(value = "/atendente/editar.html/{id}", method = RequestMethod.POST)
+    public String editar(Atendente atendente) {
+        atendenteRepo.save(atendente);
+        return "redirect:/atendente/listar.html";
     }
 }
