@@ -58,4 +58,11 @@ public class AtendenteController {
         atendenteRepo.save(atendente);
         return "redirect:/atendente/listar.html";
     }
+
+    //DELETA ATENDENTE
+    @RequestMapping(value = "/atendente/deletar.html/{id}")
+    public String deletar(@PathVariable("id") Long id) {
+        atendenteRepo.deleteById(id);
+        return "redirect:/atendente/listar.html";
+    }
 }
