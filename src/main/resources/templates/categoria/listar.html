@@ -8,20 +8,6 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/menu.html">Instituição X</a>
-        <div>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/menu.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/atendente/listar.html">Atendentes</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <br>
     <div class="container" th:with="categoriasCadastradas = ${#lists.isEmpty(categorias)}">
         <h1>Lista de Categorias</h1>
         <div th:if="${categoriasCadastradas}">
