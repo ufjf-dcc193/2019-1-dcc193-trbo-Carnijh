@@ -33,6 +33,7 @@
                         <td><span th:text="${usuario.celular}">Celular</span></td>
                         <td><span th:text="${usuario.setor}">Setor</span></td>
                         <td><span th:text="${usuario.codigoVinculo}">Código do vínculo</span></td>
+                        <td><a class="btn btn-dark" th:href="@{/usuario/detalhar.html/{id}(id=${usuario.id})}" role="button">Atendimentos</a></td>
                         <td><a class="btn btn-dark" th:href="@{/usuario/editar.html/{id}(id=${usuario.id})}" role="button">Editar</a></td>
                         <td><a class="btn btn-dark" th:href="@{/usuario/deletar.html/{id}(id=${usuario.id})}" role="button">Deletar</a></td>
                     </tr>

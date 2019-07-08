@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.ufjf.dcc193.trbo.models.Atendimento;
 import br.ufjf.dcc193.trbo.models.Usuario;
+import br.ufjf.dcc193.trbo.repositorys.AtendimentoRepository;
 import br.ufjf.dcc193.trbo.repositorys.UsuarioRepository;
 
 /**
@@ -20,6 +22,8 @@ public class UsuarioController {
 
     @Autowired
     UsuarioRepository usuarioRepo;
+    @Autowired
+    AtendimentoRepository atendimentoRepo;
 
     // CHAMA TELA CRIAR USUARIO
     @RequestMapping("/usuario/criar.html")
@@ -64,5 +68,15 @@ public class UsuarioController {
     public String deletar(@PathVariable("id") Long id) {
         usuarioRepo.deleteById(id);
         return "redirect:/usuario/listar.html";
+    }
+
+    //CHAMA A TELA DETALHAR USUARIO
+    @RequestMapping(value = "/usuario/detalhar.html/{id}")
+    public String detalhar(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioRepo.findById(id).get();
+        List<Atendimento> atendimentos = atendimentoRepo.findByUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("atendimentos", atendimentos);
+        return "/usuario/detalhar.html";
     }
 }

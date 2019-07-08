@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Atendimentos do Usuário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" th:with="atendimentosCadastrados = ${#lists.isEmpty(atendimentos)}">
+        <h1>Atendimentos - <span th:text="${usuario.nomeCompleto}">Nome</span></h1>
+        <div th:if="${atendimentosCadastrados}">
+            <p>Não há atendimentos para este usuário.</p>
+        </div>
+        <div th:unless="${atendimentosCadastrados}">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Status</th>
+                        <th scope="col">Data de criação</th>
+                        <th scope="col">Hora de criação</th>
+                        <th scope="col">Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="atendimento : ${atendimentos}">
+                        <td><span th:text="${atendimento.status}">Status</span></td>
+                        <td><span th:text="${atendimento.dataCriacao}">Data de criação</span></td>
+                        <td><span th:text="${atendimento.horaCriacao}">Hora da criação</span></td>
+                        <td><span th:text="${atendimento.descricao}">Descrição</span></td>
+                        <td><a class="btn btn-dark" th:href="@{/atendimento/detalhar.html/{id}(id=${atendimento.id})}" role="button">Detalhar</a></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <td><span th:text="${#lists.size(atendimentos)}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

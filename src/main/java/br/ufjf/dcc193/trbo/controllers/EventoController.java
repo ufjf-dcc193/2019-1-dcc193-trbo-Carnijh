@@ -39,6 +39,7 @@ public class EventoController {
         evento.setDescricao(atendimento.getDescricao());
         eventoRepo.save(evento);
         atendimento.addEvento(evento);
+        atendimentoRepo.save(atendimento);
         return "redirect:/evento/listar.html";
     }
 
