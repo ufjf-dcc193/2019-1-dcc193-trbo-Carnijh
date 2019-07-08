@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhar atendimento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Detalhar Atendimento</h1>
+        <!-- <p>Atendente: <span th:text="${atendimento.atendente.nomeCompleto}">nome</span></p>
+        <div th:if="${atendimento.usuario != null}">
+            <p>Usuário: <span th:text="${atendimento.usuario.nomeCompleto}">nome</span></p>
+        </div> -->
+        <p>Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span> | 
+        Status: <span th:text="${atendimento.status}">status</span></p>
+        <p>Data de criação: <span th:text="${atendimento.dataCriacao}">data</span> | 
+        Hora de criação: <span th:text="${atendimento.dataCriacao}">hora</span></p>
+        <div th:if="${atendimento.dataFechamento != null}">
+            <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span> | 
+            Hora de fechamento: <span th:text="${atendimento.dataFechamento}">hora</span></p>
+        </div>
+        <p>Descrição: <span th:text="${atendimento.descricao}">descrição</span></p>
+        <h4>Eventos</h4>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Atendimento</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="evento : ${atendimento.eventos}">
+                    <td><span th:text="${evento.atendimento.id}">Atendimento</span></td>
+                    <td><span th:text="${evento.tipo}">Tipo</span></td>
+                    <td><span th:text="${evento.data}">Data</span></td>
+                    <td><span th:text="${evento.hora}">Hora</span></td>
+                    <td><span th:text="${evento.descricao}">Descrição</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
