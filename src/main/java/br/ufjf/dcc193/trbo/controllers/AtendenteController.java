@@ -2,6 +2,8 @@ package br.ufjf.dcc193.trbo.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,33 +38,45 @@ public class AtendenteController {
 
     // LISTA ATENDENTES
     @RequestMapping("/atendente/listar.html")
-    public String listar(Model model) {
+    public String listar(Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("atendenteLogado") != null){
         List<Atendente> listaAtendentes = atendenteRepo.findAll();
         if (listaAtendentes != null) {
             model.addAttribute("atendentes", listaAtendentes);
         }
         return "atendente/listar.html";
     }
+    return "redirect:/index.html";
+    }
 
     //CHAMA A TELA EDITAR ATENDENTE
     @RequestMapping(value = "/atendente/editar.html/{id}")
-    public String editar(@PathVariable("id") Long id, Model model) {
+    public String editar(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("atendenteLogado") != null){
         Atendente atendente = atendenteRepo.findById(id).get();
         model.addAttribute("atendente", atendente);
         return "/atendente/editar.html";
     }
+    return "redirect:/index.html";
+    }
 
     //EDITA ATENDENTE
     @RequestMapping(value = "/atendente/editar.html/{id}", method = RequestMethod.POST)
-    public String editar(Atendente atendente) {
+    public String editar(Atendente atendente, HttpServletRequest request) {
+        if(request.getSession().getAttribute("atendenteLogado") != null){
         atendenteRepo.save(atendente);
         return "redirect:/atendente/listar.html";
+    }
+    return "redirect:/index.html";
     }
 
     //DELETA ATENDENTE
     @RequestMapping(value = "/atendente/deletar.html/{id}")
-    public String deletar(@PathVariable("id") Long id) {
+    public String deletar(@PathVariable("id") Long id, HttpServletRequest request) {
+        if(request.getSession().getAttribute("atendenteLogado") != null){
         atendenteRepo.deleteById(id);
         return "redirect:/atendente/listar.html";
+    }
+    return "redirect:/index.html";
     }
 }

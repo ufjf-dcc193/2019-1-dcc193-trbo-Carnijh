@@ -2,6 +2,8 @@ package br.ufjf.dcc193.trbo.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,56 +29,77 @@ public class UsuarioController {
 
     // CHAMA TELA CRIAR USUARIO
     @RequestMapping("/usuario/criar.html")
-    public String criar() {
-        return "/usuario/criar.html";
+    public String criar(HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            return "/usuario/criar.html";
+        }
+        return "redirect:/index.html";
     }
-    
+
     // CRIA USUARIO
     @RequestMapping(value = "/usuario/criar.html", method = RequestMethod.POST)
-    public String criar(Usuario usuario) {
-        usuarioRepo.save(usuario);
-        return "redirect:/usuario/listar.html";
+    public String criar(Usuario usuario, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            usuarioRepo.save(usuario);
+            return "redirect:/usuario/listar.html";
+        }
+        return "redirect:/index.html";
     }
 
     // LISTA USUARIOS
     @RequestMapping("/usuario/listar.html")
-    public String listar(Model model) {
-        List<Usuario> listaUsuarios = usuarioRepo.findAll();
-        if (listaUsuarios != null) {
-            model.addAttribute("usuarios", listaUsuarios);
+    public String listar(Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
+            return "usuario/listar.html";
         }
-        return "usuario/listar.html";
+        return "redirect:/index.html";
     }
 
-    //CHAMA A TELA EDITAR USUARIO
+    // CHAMA A TELA EDITAR USUARIO
     @RequestMapping(value = "/usuario/editar.html/{id}")
-    public String editar(@PathVariable("id") Long id, Model model) {
-        Usuario usuario = usuarioRepo.findById(id).get();
-        model.addAttribute("usuario", usuario);
-        return "/usuario/editar.html";
+    public String editar(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            Usuario usuario = usuarioRepo.findById(id).get();
+            model.addAttribute("usuario", usuario);
+            return "/usuario/editar.html";
+        }
+        return "redirect:/index.html";
     }
 
-    //EDITA USUARIO
+    // EDITA USUARIO
     @RequestMapping(value = "/usuario/editar.html/{id}", method = RequestMethod.POST)
-    public String editar(Usuario usuario) {
-        usuarioRepo.save(usuario);
-        return "redirect:/usuario/listar.html";
+    public String editar(Usuario usuario, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            usuarioRepo.save(usuario);
+            return "redirect:/usuario/listar.html";
+        }
+        return "redirect:/index.html";
     }
 
-    //DELETA USUARIO
+    // DELETA USUARIO
     @RequestMapping(value = "/usuario/deletar.html/{id}")
-    public String deletar(@PathVariable("id") Long id) {
-        usuarioRepo.deleteById(id);
-        return "redirect:/usuario/listar.html";
+    public String deletar(@PathVariable("id") Long id, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            usuarioRepo.deleteById(id);
+            return "redirect:/usuario/listar.html";
+        }
+        return "redirect:/index.html";
     }
 
-    //CHAMA A TELA DETALHAR USUARIO
+    // CHAMA A TELA DETALHAR USUARIO
     @RequestMapping(value = "/usuario/detalhar.html/{id}")
-    public String detalhar(@PathVariable("id") Long id, Model model) {
-        Usuario usuario = usuarioRepo.findById(id).get();
-        List<Atendimento> atendimentos = atendimentoRepo.findByUsuario(usuario);
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("atendimentos", atendimentos);
-        return "/usuario/detalhar.html";
+    public String detalhar(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            Usuario usuario = usuarioRepo.findById(id).get();
+            List<Atendimento> atendimentos = atendimentoRepo.findByUsuario(usuario);
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("atendimentos", atendimentos);
+            return "/usuario/detalhar.html";
+        }
+        return "redirect:/index.html";
     }
 }

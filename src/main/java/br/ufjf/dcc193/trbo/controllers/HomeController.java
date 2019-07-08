@@ -38,8 +38,11 @@ public class HomeController {
 
     // CHAMA TELA MENU
     @RequestMapping("/menu.html")
-    public String menu() {
-        return "/menu.html";
+    public String menu(HttpServletRequest request) {
+        if(request.getSession().getAttribute("atendenteLogado") != null){
+            return "/menu.html";
+        }
+        return "redirect:/index.html";
     }
 
 }
