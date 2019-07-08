@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,11 +80,11 @@ public class AtendimentoController {
         return "atendimento/listar.html";
     }
 
-    //CHAMA A TELA EDITAR ATENDIMENTO
-    // @RequestMapping(value = "/atendimento/editar.html/{id}")
-    // public String editar(@PathVariable("id") Long id, Model model) {
-    //     Atendimento atendimento = atendimentoRepo.findById(id).get();
-    //     model.addAttribute("atendimento", atendimento);
-    //     return "/atendimento/editar.html";
-    // }
+    //CHAMA A TELA DETALHAR ATENDIMENTO
+    @RequestMapping(value = "/atendimento/detalhar.html/{id}")
+    public String editar(@PathVariable("id") Long id, Model model) {
+        Atendimento atendimento = atendimentoRepo.findById(id).get();
+        model.addAttribute("atendimento", atendimento);
+        return "/atendimento/detalhar.html";
+    }
 }

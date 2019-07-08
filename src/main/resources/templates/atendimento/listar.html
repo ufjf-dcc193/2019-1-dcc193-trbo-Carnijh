@@ -35,6 +35,7 @@
                         <td><span th:text="${atendimento.dataCriacao}">Data de criação</span></td>
                         <td><span th:text="${atendimento.horaCriacao}">Hora da criação</span></td>
                         <td><span th:text="${atendimento.descricao}">Descrição</span></td>
+                        <td><a class="btn btn-dark" th:href="@{/atendimento/detalhar.html/{id}(id=${atendimento.id})}" role="button">Detalhar</a></td>
                         <td><a class="btn btn-dark" th:href="@{/atendimento/editar.html/{id}(id=${atendimento.id})}" role="button">Editar</a></td>
                         <td><a class="btn btn-dark" th:href="@{/atendimento/deletar.html/{id}(id=${atendimento.id})}" role="button">Deletar</a></td>
                     </tr>
