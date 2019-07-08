@@ -13,4 +13,5 @@ public interface AtendenteRepository extends JpaRepository<Atendente, Long> {
     List<Atendente> findAll();
     void deleteById(Long id);
     Atendente findByEmail(String email);
+    Atendente findByEmailAndCodigoAcesso(String email, String codigoAcesso);
 }

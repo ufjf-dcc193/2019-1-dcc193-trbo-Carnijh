@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,8 @@ public class Atendente {
     private String nomeCompleto;
     private String codigoAcesso;
     private String telefone;
-    private String celular;
+	private String celular;
+	@Column(unique=true)
     private String email;
 
 	public Long getId() {

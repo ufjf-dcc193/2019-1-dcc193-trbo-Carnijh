@@ -1,6 +1,6 @@
 package br.ufjf.dcc193.trbo.controllers;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +27,10 @@ public class HomeController {
 
     // FAZ LOGIN
     @RequestMapping(value = {"/", "/index.html"}, method = RequestMethod.POST)
-    public String login(Atendente atendente, HttpSession session) {
-        Atendente atendenteAux = atendenteRepo.findByEmail(atendente.getEmail());
+    public String login(Atendente atendente, HttpServletRequest request) {
+        Atendente atendenteAux = atendenteRepo.findByEmailAndCodigoAcesso(atendente.getEmail(), atendente.getCodigoAcesso());
         if(atendenteAux != null) {
-            session.setAttribute("atendenteLogado", atendente);
+            request.getSession().setAttribute("atendenteLogado", atendente);
             return "redirect:/menu.html";
         }
         return "/index.html";
