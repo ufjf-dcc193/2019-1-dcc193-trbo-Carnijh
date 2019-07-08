@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.ufjf.dcc193.trbo.models.Atendente;
 import br.ufjf.dcc193.trbo.models.Atendimento;
 import br.ufjf.dcc193.trbo.models.Categoria;
+import br.ufjf.dcc193.trbo.models.Evento;
 import br.ufjf.dcc193.trbo.models.Usuario;
 import br.ufjf.dcc193.trbo.repositorys.AtendimentoRepository;
 import br.ufjf.dcc193.trbo.repositorys.CategoriaRepository;
+import br.ufjf.dcc193.trbo.repositorys.EventoRepository;
 import br.ufjf.dcc193.trbo.repositorys.UsuarioRepository;
 
 /**
@@ -32,6 +34,8 @@ public class AtendimentoController {
     UsuarioRepository usuarioRepo;
     @Autowired
     CategoriaRepository categoriaRepo;
+    @Autowired
+    EventoRepository eventoRepo;
 
     // CHAMA TELA CRIAR ATENDIMENTO
     @RequestMapping("/atendimento/criar.html")
@@ -51,18 +55,18 @@ public class AtendimentoController {
     @RequestMapping(value = "/atendimento/criar.html", method = RequestMethod.POST)
     public String criar(Atendimento atendimento, HttpSession session) {
         // Pega data atual
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");  
         Date data = new Date();
-        atendimento.setDataCriacao(formatter.format(data));
+        atendimento.setDataCriacao(formataData.format(data));
         // Pega hora atual
-        formatter = new SimpleDateFormat("HH:mm:ss");  
-        atendimento.setHoraCriacao(formatter.format(data));
+        SimpleDateFormat formataHora = new SimpleDateFormat("HH:mm:ss");  
+        atendimento.setHoraCriacao(formataHora.format(data));
         // Seta Atendente
         atendimento.setAtendente((Atendente)session.getAttribute("atendenteLogado"));
         // Seta status
         atendimento.setStatus("Em revisão");
         atendimentoRepo.save(atendimento);
-        return "redirect:/atendimento/listar.html";
+        return "redirect:/evento/criar.html/"+atendimento.getId();
     }
 
     // LISTA ATENDIMENTOS

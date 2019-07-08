@@ -120,4 +120,8 @@ public class Atendimento {
 		this.eventos = eventos;
 	}
 
+	public void addEvento(Evento evento){
+		getEventos().add(evento);
+	} 
+
 }

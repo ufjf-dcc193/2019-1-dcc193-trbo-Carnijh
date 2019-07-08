@@ -1,7 +1,5 @@
 package br.ufjf.dcc193.trbo.models;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,9 +15,20 @@ public class Evento {
 	private Long id;
 	@ManyToOne
     private Atendimento atendimento;
-    private Date dataHora;
+    private String data;
+    private String hora;
     private String tipo; // Class tipo ? (entre: abertura, fechamento, alteração de Usuário, alteração de Categoria, alteração de Atendente, alteração de status e uma descrição textual
     private String descricao; // Perguntar pro professor se faz parte do tipo.
+
+	public Evento(){}
+
+	public Evento(Atendimento atendimento, String data, String hora, String tipo, String descricao) {
+		this.atendimento = atendimento;
+		this.data = data;
+		this.hora = hora;
+		this.tipo = tipo;
+		this.descricao = descricao;
+	}
 
 	public Long getId() {
 		return this.id;
@@ -37,12 +46,20 @@ public class Evento {
 		this.atendimento = atendimento;
 	}
 
-	public Date getDataHora() {
-		return this.dataHora;
+	public String getData() {
+		return this.data;
 	}
 
-	public void setDataHora(Date dataHora) {
-		this.dataHora = dataHora;
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getHora() {
+		return this.hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
 	public String getTipo() {
