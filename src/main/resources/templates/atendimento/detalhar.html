@@ -4,23 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalhar atendimento</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/menu.html">Instituição X</a>
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/menu.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/atendente/listar.html">Atendentes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/usuario/listar.html">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categoria/listar.html">Categorias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/atendimento/listar.html">Atendimentos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/evento/listar.html">Eventos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
     <div class="container">
         <h1>Detalhar Atendimento</h1>
         <!-- <p>Atendente: <span th:text="${atendimento.atendente.nomeCompleto}">nome</span></p>
         <div th:if="${atendimento.usuario != null}">
             <p>Usuário: <span th:text="${atendimento.usuario.nomeCompleto}">nome</span></p>
         </div> -->
-        <p>Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span> | 
-        Status: <span th:text="${atendimento.status}">status</span></p>
-        <p>Data de criação: <span th:text="${atendimento.dataCriacao}">data</span> | 
-        Hora de criação: <span th:text="${atendimento.dataCriacao}">hora</span></p>
+        <p>Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span> |
+            Status: <span th:text="${atendimento.status}">status</span></p>
+        <p>Data de criação: <span th:text="${atendimento.dataCriacao}">data</span> |
+            Hora de criação: <span th:text="${atendimento.dataCriacao}">hora</span></p>
         <div th:if="${atendimento.dataFechamento != null}">
-            <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span> | 
-            Hora de fechamento: <span th:text="${atendimento.dataFechamento}">hora</span></p>
+            <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span> |
+                Hora de fechamento: <span th:text="${atendimento.dataFechamento}">hora</span></p>
         </div>
         <p>Descrição: <span th:text="${atendimento.descricao}">descrição</span></p>
         <h4>Eventos</h4>
