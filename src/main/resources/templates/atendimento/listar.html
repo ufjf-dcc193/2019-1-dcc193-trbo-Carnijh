@@ -66,7 +66,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <!-- <th scope="col">Atendente</th> -->
+                        <th scope="col">Atendente</th>
                         <th scope="col">Usuário</th>
                         <th scope="col">Status</th>
                         <th scope="col">Data de criação</th>
@@ -77,8 +77,8 @@
                 <tbody>
                     <tr th:each="atendimento : ${atendimentos}">
                         <th><span th:text="${atendimento.id}">Id</span></th>
-                        <!-- <td><span th:text="${atendimento.atendente.nomeCompleto}">Atendente</span></td> -->
-                        <th><span th:text="${atendimento.usuario.nomeCompleto}">Usuário</span></th>
+                        <td><span th:text="${atendimento.atendente.nomeCompleto}">Atendente</span></td>
+                        <td><span th:text="${atendimento.usuario.nomeCompleto}">Usuário</span></td>
                         <td><span th:text="${atendimento.status}">Status</span></td>
                         <td><span th:text="${atendimento.dataCriacao}">Data de criação</span></td>
                         <td><span th:text="${atendimento.horaCriacao}">Hora da criação</span></td>

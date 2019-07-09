@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,7 +70,9 @@ public class AtendimentoController {
             SimpleDateFormat formataHora = new SimpleDateFormat("HH:mm:ss");
             atendimento.setHoraCriacao(formataHora.format(data));
             // Seta Atendente
-            atendimento.setAtendente((Atendente) request.getSession().getAttribute("atendenteLogado"));
+            Atendente atendenteAux = (Atendente) request.getSession().getAttribute("atendenteLogado");
+            Atendente atendente = atendenteRepo.findByEmailAndCodigoAcesso(atendenteAux.getEmail(), atendenteAux.getCodigoAcesso());
+            atendimento.setAtendente(atendente);
             // Seta status
             atendimento.setStatus("Em revisão");
             atendimentoRepo.save(atendimento);
