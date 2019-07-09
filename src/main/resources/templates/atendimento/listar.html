@@ -37,31 +37,34 @@
     <br>
     <div class="container" th:with="atendimentosCadastrados = ${#lists.isEmpty(atendimentos)}">
         <h1>Lista de Atendimentos</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/atendimento/listar.html">Todos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownCategoria" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoria</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownCategoria">
+                            <a class="dropdown-item" th:each="categoria : ${categorias}" th:href="@{/atendimento/listar.html/categoria/{id}(id=${categoria.id})}"><span th:text="${categoria.titulo}">categoria</span></a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownAtendente" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Atendente</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownAtendente">
+                            <a class="dropdown-item" th:each="atendente : ${atendentes}" th:href="@{/atendimento/listar.html/atendente/{id}(id=${atendente.id})}"><span th:text="${atendente.nomeCompleto}">atendente</span></a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/atendimento/listar.html/fechados}">Fechados</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <div th:if="${atendimentosCadastrados}">
             <p>Não há atendimentos cadastrados.</p>
         </div>
         <div class="row" th:unless="${atendimentosCadastrados}">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="dropdownCategoria" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoria</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownCategoria">
-                                <a class="dropdown-item" th:each="categoria : ${categorias}" th:href="@{/atendimento/listar.html/categoria/{id}(id=${categoria.id})}"><span th:text="${categoria.titulo}">categoria</span></a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="dropdownAtendente" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Atendente</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownAtendente">
-                                <a class="dropdown-item" th:each="atendente : ${atendentes}" th:href="@{/atendimento/listar.html/atendente/{id}(id=${atendente.id})}"><span th:text="${atendente.nomeCompleto}">atendente</span></a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" th:href="@{/atendimento/listar.html/fechados}">Fechados</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -84,8 +87,6 @@
                         <td><span th:text="${atendimento.horaCriacao}">Hora da criação</span></td>
                         <td><span th:text="${atendimento.descricao}">Descrição</span></td>
                         <td><a class="btn btn-dark" th:href="@{/atendimento/detalhar.html/{id}(id=${atendimento.id})}" role="button">Detalhar</a></td>
-                        <td><a class="btn btn-dark" th:href="@{/atendimento/editar.html/{id}(id=${atendimento.id})}" role="button">Editar</a></td>
-                        <td><a class="btn btn-dark" th:href="@{/atendimento/deletar.html/{id}(id=${atendimento.id})}" role="button">Deletar</a></td>
                     </tr>
                 </tbody>
             </table>
