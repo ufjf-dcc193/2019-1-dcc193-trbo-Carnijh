@@ -1,7 +1,6 @@
 package br.ufjf.dcc193.trbo.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,8 +31,7 @@ public class EventoController {
     public String criar(@PathVariable("id") Long id, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Evento evento = new Evento();
-            Optional<Atendimento> atendimentoAux = atendimentoRepo.findById(id);
-            Atendimento atendimento = atendimentoAux.orElse(new Atendimento());
+            Atendimento atendimento = atendimentoRepo.findById(id).get();
             evento.setAtendimento(atendimento);
             evento.setData(atendimento.getDataCriacao());
             evento.setHora(atendimento.getHoraCriacao());

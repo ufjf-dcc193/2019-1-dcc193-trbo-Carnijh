@@ -81,7 +81,14 @@
                     <tr th:each="atendimento : ${atendimentos}">
                         <th><span th:text="${atendimento.id}">Id</span></th>
                         <td><span th:text="${atendimento.atendente.nomeCompleto}">Atendente</span></td>
-                        <td><span th:text="${atendimento.usuario.nomeCompleto}">Usuário</span></td>
+                        <div th:with="usuario = ${atendimento.usuario != null}">
+                            <div th:if="${usuario}">
+                                <td><span th:text="${atendimento.usuario.nomeCompleto}">Usuário</span></td>
+                            </div>
+                            <div th:unless="${usuario}">
+                                <td>Não há</td>
+                            </div>
+                        </div>
                         <td><span th:text="${atendimento.status}">Status</span></td>
                         <td><span th:text="${atendimento.dataCriacao}">Data de criação</span></td>
                         <td><span th:text="${atendimento.horaCriacao}">Hora da criação</span></td>

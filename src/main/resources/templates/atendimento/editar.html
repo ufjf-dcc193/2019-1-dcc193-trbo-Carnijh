@@ -37,39 +37,57 @@
     <br>
     <div class="container">
         <h1>Editar Atendimento</h1>
-        <div th:if="${atendentes != null}">
-            <label for="atendente">Atendente: </label>
-            <select class="custom-select" name="atendente">
-                <option selected>Escolha ...</option>
-                <option th:each="atendente : ${atendentes}" th:value="${atendente.id}"><span
-                        th:text="${atendente.nomeCompleto}">Nome completo</span></option>
-            </select>
-        </div>
-        <div class="row" th:unless="${atendentes == null}">
-            <p>Atendente: <span th:text="${atendimento.atendente.nomeCompleto}">nome</span></p>
-        </div>
-        <div th:if="${usuarios != null}">
-            <label for="usuario">Usuário: </label>
-            <select class="custom-select" name="usuario">
-                <option selected>Escolha ...</option>
-                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"><span
-                        th:text="${usuario.nomeCompleto}">Nome completo</span></option>
-            </select>
-        </div>
-        <div class="row" th:unless="${usuarios == null}">
-            <div th:if="${atendimento.usuario != null}">
-                <p>Usuário: <span th:text="${atendimento.usuario.nomeCompleto}">nome</span></p>
+        <form method="POST">
+            <div class="form-group">
+                <div th:if="${atendentes != null}">
+                    <label for="atendente">Atendente: </label>
+                    <select class="custom-select" name="atendente">
+                        <option selected>Escolha ...</option>
+                        <option th:each="atendente : ${atendentes}" th:value="${atendente.id}"><span
+                                th:text="${atendente.nomeCompleto}">Nome completo</span></option>
+                    </select>
+                </div>
+
+                <div th:if="${usuarios != null}">
+                    <label for="usuario">Usuário: </label>
+                    <select class="custom-select" name="usuario">
+                        <option value="0"  selected>Nenhum</option>
+                        <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"><span
+                                th:text="${usuario.nomeCompleto}">Nome completo</span></option>
+                    </select>
+                </div>
+
+                <div th:if="${categorias != null}">
+                    <label for="categoria">Categoria: </label>
+                    <select class="custom-select" name="categoria">
+                        <option selected>Escolha ...</option>
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.id}"><span
+                                th:text="${categoria.titulo}">Título</span></option>
+                    </select>
+                </div>
+
+                <div th:if="${status != null}">
+                    <label for="status">Status: </label>
+                    <select class="custom-select" name="status">
+                        <option selected>Escolha ...</option>
+                        <option value="Em revisão">Em revisão</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Bloqueado">Bloqueado</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Fechado">Fechado</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <p>Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span></p>
-        <p>Status: <span th:text="${atendimento.status}">status</span></p>
-        <p>Data de criação: <span th:text="${atendimento.dataCriacao}">data</span></p>
-        <p>Hora de criação: <span th:text="${atendimento.dataCriacao}">hora</span></p>
-        <div th:if="${atendimento.dataFechamento != null}">
-            <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span></p>
-            <p>Hora de fechamento: <span th:text="${atendimento.dataFechamento}">hora</span></p>
-        </div>
-        <p>Descrição: <span th:text="${atendimento.descricao}">descrição</span></p>
+            <div class="form-group">
+                <label for="motivo">Motivo da alteração: </label>
+                <textarea class="form-control" name="motivo"></textarea>
+            </div>
+
+            <input type="hidden" th:value="${atendimento.id}" name="atendimentoId">
+
+            <button type="submit" class="btn btn-dark">Editar</button>
+        </form>
+
     </div>
 </body>
 

@@ -6,6 +6,7 @@
     <title>Detalhar atendimento</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -37,17 +38,30 @@
     <br>
     <div class="container">
         <h1>Detalhar Atendimento</h1>
-        <p>Atendente: <span th:text="${atendimento.atendente.nomeCompleto}">nome</span></p>
-        <div th:if="${atendimento.usuario != null}">
-            <p>Usuário: <span th:text="${atendimento.usuario.nomeCompleto}">nome</span></p>
+        <p><a class="btn" th:href="@{/atendimento/editar.html/atendente/{id}(id=${atendimento.id})}"><i
+            class="fa fa-edit"></i></a> Atendente: <span th:text="${atendimento.atendente.nomeCompleto}">nome</span></p>
+        <div th:with="usuario = ${atendimento.usuario != null}">
+            <div th:if="${usuario}">
+                <p><a class="btn" th:href="@{/atendimento/editar.html/usuario/{id}(id=${atendimento.id})}"><i
+                            class="fa fa-edit"></i></a> Usuário: <span
+                        th:text="${atendimento.usuario.nomeCompleto}">nome</span></p>
+            </div>
+            <div th:unless="${usuario}">
+                <p><a class="btn" th:href="@{/atendimento/editar.html/usuario/{id}(id=${atendimento.id})}"><i
+                            class="fa fa-plus"></i></a> Usuário</p>
+            </div>
         </div>
-        <p>Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span></p>
-        <p>Status: <span th:text="${atendimento.status}">status</span></p>
+        <p><a class="btn" th:href="@{/atendimento/editar.html/categoria/{id}(id=${atendimento.id})}"><i
+            class="fa fa-edit"></i></a> Categoria: <span th:text="${atendimento.categoria.titulo}">categoria</span></p>
+        <p><a class="btn" th:href="@{/atendimento/editar.html/status/{id}(id=${atendimento.id})}"><i
+            class="fa fa-edit"></i></a> Status: <span th:text="${atendimento.status}">status</span></p>
         <p>Data de criação: <span th:text="${atendimento.dataCriacao}">data</span></p>
-        <p>Hora de criação: <span th:text="${atendimento.dataCriacao}">hora</span></p>
-        <div th:if="${atendimento.dataFechamento != null}">
-            <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span></p>
-            <p>Hora de fechamento: <span th:text="${atendimento.dataFechamento}">hora</span></p>
+        <p>Hora de criação: <span th:text="${atendimento.horaCriacao}">hora</span></p>
+        <div th:with="fechado = ${atendimento.dataFechamento != null}">
+            <div th:if="${fechado}">
+                <p>Data de fechamento: <span th:text="${atendimento.dataFechamento}">data</span></p>
+                <p>Hora de fechamento: <span th:text="${atendimento.horaFechamento}">hora</span></p>
+            </div>
         </div>
         <p>Descrição: <span th:text="${atendimento.descricao}">descrição</span></p>
         <h4>Eventos</h4>
