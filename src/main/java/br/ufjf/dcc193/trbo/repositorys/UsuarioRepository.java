@@ -11,5 +11,6 @@ import br.ufjf.dcc193.trbo.models.Usuario;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findAll();
+    List<Usuario> findByDeletado(Boolean deletado);
     void deleteById(Long id);
 }

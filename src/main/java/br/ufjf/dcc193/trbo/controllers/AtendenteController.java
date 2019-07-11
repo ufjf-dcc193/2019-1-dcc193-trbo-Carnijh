@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.ufjf.dcc193.trbo.models.Atendente;
+import br.ufjf.dcc193.trbo.models.Atendimento;
 import br.ufjf.dcc193.trbo.repositorys.AtendenteRepository;
+import br.ufjf.dcc193.trbo.repositorys.AtendimentoRepository;
 
 /**
  * AtendenteController
@@ -23,6 +25,9 @@ public class AtendenteController {
     @Autowired
     AtendenteRepository atendenteRepo;
 
+    @Autowired
+    AtendimentoRepository atendimentoRepo;
+
     // CHAMA TELA CRIAR ATENDENTE
     @RequestMapping("/atendente/criar.html")
     public String criar() {
@@ -32,6 +37,7 @@ public class AtendenteController {
     // CRIA ATENDENTE
     @RequestMapping(value = "/atendente/criar.html", method = RequestMethod.POST)
     public String criar(Atendente atendente) {
+        atendente.setDeletado(false);
         atendenteRepo.save(atendente);
         return "redirect:/index.html";
     }
@@ -40,7 +46,7 @@ public class AtendenteController {
     @RequestMapping("/atendente/listar.html")
     public String listar(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Atendente> listaAtendentes = atendenteRepo.findByDeletado(false);
             if (listaAtendentes != null) {
                 model.addAttribute("atendentes", listaAtendentes);
             }
@@ -74,7 +80,15 @@ public class AtendenteController {
     @RequestMapping(value = "/atendente/deletar.html/{id}")
     public String deletar(@PathVariable("id") Long id, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            atendenteRepo.deleteById(id);
+            Atendente atendente = atendenteRepo.findById(id).get();
+            List<Atendimento> atendimentos = atendimentoRepo.findByAtendente(atendente);
+            if(atendimentos == null){
+                atendenteRepo.delete(atendente);
+            }
+            else{
+                atendente.setDeletado(true);
+                atendenteRepo.save(atendente);
+            }
             return "redirect:/atendente/listar.html";
         }
         return "redirect:/index.html";

@@ -11,5 +11,6 @@ import br.ufjf.dcc193.trbo.models.Categoria;
  */
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     List<Categoria> findAll();
+    List<Categoria> findByDeletado(Boolean deletado);
     void deleteById(Long id);
 }

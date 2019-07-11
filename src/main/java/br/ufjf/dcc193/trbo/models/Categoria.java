@@ -16,7 +16,8 @@ public class Categoria {
 	@Column(nullable = false)
     private String titulo;
 	@Column(nullable = false)
-    private String descricao;
+	private String descricao;
+	private Boolean deletado;
 
 	public Long getId() {
 		return this.id;
@@ -40,6 +41,14 @@ public class Categoria {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Boolean getDeletado() {
+		return deletado;
+	}
+
+	public void setDeletado(Boolean deletado) {
+		this.deletado = deletado;
 	}
 
     

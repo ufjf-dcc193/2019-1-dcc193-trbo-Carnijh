@@ -15,9 +15,10 @@ import br.ufjf.dcc193.trbo.models.Usuario;
 public interface AtendimentoRepository extends JpaRepository<Atendimento, Long> {
     List<Atendimento> findAll();
     void deleteById(Long id);
+    List<Atendimento> findByAtendente(Atendente atendente);
     List<Atendimento> findByUsuario(Usuario usuario);
+    List<Atendimento> findByCategoria(Categoria categoria);
+    List<Atendimento> findByStatus(String status);
     List<Atendimento> findByAtendenteAndStatus(Atendente atendente, String status);
     List<Atendimento> findByCategoriaAndStatus(Categoria categoria, String status);
-    List<Atendimento> findByStatus(String status);
-    
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.ufjf.dcc193.trbo.models.Atendimento;
 import br.ufjf.dcc193.trbo.models.Categoria;
+import br.ufjf.dcc193.trbo.repositorys.AtendimentoRepository;
 import br.ufjf.dcc193.trbo.repositorys.CategoriaRepository;
 
 /**
@@ -22,6 +24,9 @@ public class CategoriaController {
 
     @Autowired
     CategoriaRepository categoriaRepo;
+
+    @Autowired
+    AtendimentoRepository atendimentoRepo;
 
     // CHAMA TELA CRIAR CATEGORIA
     @RequestMapping("/categoria/criar.html")
@@ -36,6 +41,7 @@ public class CategoriaController {
     @RequestMapping(value = "/categoria/criar.html", method = RequestMethod.POST)
     public String criar(Categoria categoria, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
+            categoria.setDeletado(false);
             categoriaRepo.save(categoria);
             return "redirect:/categoria/listar.html";
         }
@@ -46,7 +52,7 @@ public class CategoriaController {
     @RequestMapping("/categoria/listar.html")
     public String listar(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            List<Categoria> listaCategorias = categoriaRepo.findAll();
+            List<Categoria> listaCategorias = categoriaRepo.findByDeletado(false);
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
@@ -80,7 +86,15 @@ public class CategoriaController {
     @RequestMapping(value = "/categoria/deletar.html/{id}")
     public String deletar(@PathVariable("id") Long id, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            categoriaRepo.deleteById(id);
+            Categoria categoria = categoriaRepo.findById(id).get();
+            List<Atendimento> atendimentos = atendimentoRepo.findByCategoria(categoria);
+            if (atendimentos == null) {
+                categoriaRepo.delete(categoria);
+            }
+            else{
+                categoria.setDeletado(true);
+                categoriaRepo.save(categoria);
+            }
             return "redirect:/categoria/listar.html";
         }
         return "redirect:/index.html";

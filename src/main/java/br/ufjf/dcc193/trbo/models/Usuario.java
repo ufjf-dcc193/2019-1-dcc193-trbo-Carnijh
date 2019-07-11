@@ -24,7 +24,8 @@ public class Usuario {
 	@Column(nullable = false)
 	private String celular;
 	@Column(nullable=false)
-    private String email;
+	private String email;
+	private Boolean deletado;
 
 	public Long getId() {
 		return this.id;
@@ -80,6 +81,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getDeletado() {
+		return deletado;
+	}
+
+	public void setDeletado(Boolean deletado) {
+		this.deletado = deletado;
 	}
 
 }

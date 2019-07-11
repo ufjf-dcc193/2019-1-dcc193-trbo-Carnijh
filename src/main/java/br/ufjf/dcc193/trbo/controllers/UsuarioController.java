@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.ufjf.dcc193.trbo.models.Atendimento;
 import br.ufjf.dcc193.trbo.models.Usuario;
 import br.ufjf.dcc193.trbo.repositorys.AtendimentoRepository;
 import br.ufjf.dcc193.trbo.repositorys.UsuarioRepository;
@@ -49,7 +50,7 @@ public class UsuarioController {
     @RequestMapping("/usuario/listar.html")
     public String listar(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findByDeletado(false);
             if (listaUsuarios != null) {
                 model.addAttribute("usuarios", listaUsuarios);
             }
@@ -83,7 +84,15 @@ public class UsuarioController {
     @RequestMapping(value = "/usuario/deletar.html/{id}")
     public String deletar(@PathVariable("id") Long id, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            usuarioRepo.deleteById(id);
+            Usuario usuario = usuarioRepo.findById(id).get();
+            List<Atendimento> atendimentos = atendimentoRepo.findByUsuario(usuario);
+            if (atendimentos == null) {
+                usuarioRepo.delete(usuario);
+            }
+            else{
+                usuario.setDeletado(true);
+                usuarioRepo.save(usuario);
+            }
             return "redirect:/usuario/listar.html";
         }
         return "redirect:/index.html";

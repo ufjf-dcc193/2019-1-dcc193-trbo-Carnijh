@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label for="usuario">Usuário: </label>
                 <select class="custom-select" name="usuario">
-                    <option selected>Escolha ...</option>
+                    <option value="0" selected>Nenhum</option>
                     <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"><span
                             th:text="${usuario.nomeCompleto}">Nome completo</span></option>
                 </select>

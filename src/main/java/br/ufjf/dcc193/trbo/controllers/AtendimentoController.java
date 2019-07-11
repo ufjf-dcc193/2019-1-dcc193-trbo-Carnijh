@@ -46,11 +46,11 @@ public class AtendimentoController {
     @RequestMapping("/atendimento/criar.html")
     public String criar(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findByDeletado(false);
             if (listaUsuarios != null) {
                 model.addAttribute("usuarios", listaUsuarios);
             }
-            List<Categoria> listaCategorias = categoriaRepo.findAll();
+            List<Categoria> listaCategorias = categoriaRepo.findByDeletado(false);
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
@@ -61,8 +61,23 @@ public class AtendimentoController {
 
     // CRIA ATENDIMENTO
     @RequestMapping(value = "/atendimento/criar.html", method = RequestMethod.POST)
-    public String criar(Atendimento atendimento, HttpServletRequest request) {
+    public String criar(
+    @RequestParam("usuario") Long usuarioId, 
+    @RequestParam("categoria") Long categoriaId, 
+    @RequestParam("descricao") String descricao, 
+    HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
+            Atendimento atendimento = new Atendimento();
+            if (usuarioId == 0) {
+                atendimento.setUsuario(null);
+            }
+            else{
+                Usuario usuario = usuarioRepo.findById(usuarioId).get();
+                atendimento.setUsuario(usuario);
+            }
+            Categoria categoria = categoriaRepo.findById(categoriaId).get();
+            atendimento.setCategoria(categoria);
+            atendimento.setDescricao(descricao);
             // Pega data atual
             SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
             Date data = new Date();
@@ -244,7 +259,7 @@ public class AtendimentoController {
     public String editarUsuario(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Atendimento atendimento = atendimentoRepo.findById(id).get();
-            List<Usuario> usuarios = usuarioRepo.findAll();
+            List<Usuario> usuarios = usuarioRepo.findByDeletado(false);
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("usuarios", usuarios);
             return "atendimento/editar.html";
@@ -298,7 +313,7 @@ public class AtendimentoController {
     public String editarAtendente(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Atendimento atendimento = atendimentoRepo.findById(id).get();
-            List<Atendente> atendentes = atendenteRepo.findAll();
+            List<Atendente> atendentes = atendenteRepo.findByDeletado(false);
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("atendentes", atendentes);
             return "atendimento/editar.html";
@@ -344,7 +359,7 @@ public class AtendimentoController {
     public String editarCategoria(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Atendimento atendimento = atendimentoRepo.findById(id).get();
-            List<Categoria> categorias = categoriaRepo.findAll();
+            List<Categoria> categorias = categoriaRepo.findByDeletado(false);
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("categorias", categorias);
             return "atendimento/editar.html";
