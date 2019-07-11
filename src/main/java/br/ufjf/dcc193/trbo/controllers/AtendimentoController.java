@@ -287,7 +287,12 @@ public class AtendimentoController {
             }
             else{
                 Usuario usuario = usuarioRepo.findById(usuarioId).get();
-                log = " - Usuário alterado de "+atendimento.getUsuario().getNomeCompleto()+" para "+usuario.getNomeCompleto()+".";
+                if(atendimento.getUsuario() != null) {
+                    log = " - Usuário alterado de "+atendimento.getUsuario().getNomeCompleto()+" para "+usuario.getNomeCompleto()+".";
+                }
+                else {
+                    log = " - Colocando usuário: "+usuario.getNomeCompleto()+".";
+                }
                 atendimento.setUsuario(usuario);
             }
             
