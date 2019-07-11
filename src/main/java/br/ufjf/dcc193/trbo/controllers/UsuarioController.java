@@ -40,6 +40,7 @@ public class UsuarioController {
     @RequestMapping(value = "/usuario/criar.html", method = RequestMethod.POST)
     public String criar(Usuario usuario, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
+            usuario.setDeletado(false);
             usuarioRepo.save(usuario);
             return "redirect:/usuario/listar.html";
         }
