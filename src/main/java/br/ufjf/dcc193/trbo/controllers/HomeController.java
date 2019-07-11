@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.ufjf.dcc193.trbo.models.Atendente;
 import br.ufjf.dcc193.trbo.repositorys.AtendenteRepository;
@@ -21,6 +22,7 @@ public class HomeController {
 
     // CHAMA TELA INDEX
     @RequestMapping({"/", "/index.html"})
+    @ResponseBody
     public String login() {
         return "/index.html";
     }
