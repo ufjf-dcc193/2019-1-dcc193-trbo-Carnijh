@@ -20,7 +20,7 @@ import br.ufjf.dcc193.trbo.repositorys.UsuarioRepository;
  * UsuarioController
  */
 @Controller
-public class UsuarioController {
+public class UsuarioController { 
 
     @Autowired
     UsuarioRepository usuarioRepo;
