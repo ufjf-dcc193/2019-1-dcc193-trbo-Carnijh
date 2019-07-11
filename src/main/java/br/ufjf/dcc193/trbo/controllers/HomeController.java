@@ -22,9 +22,8 @@ public class HomeController {
 
     // CHAMA TELA INDEX
     @RequestMapping({"/", "/index.html"})
-    @ResponseBody
     public String login() {
-        return "/index.html";
+        return "index.html";
     }
 
     // FAZ LOGIN
