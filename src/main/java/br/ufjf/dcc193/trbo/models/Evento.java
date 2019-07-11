@@ -15,7 +15,6 @@ public class Evento {
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
-	@Column(nullable = false)
     private Atendimento atendimento;
 	@Column(nullable = false)
     private String data;

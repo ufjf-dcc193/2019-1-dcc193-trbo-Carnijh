@@ -18,7 +18,6 @@ public class Atendimento {
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
-	@Column(nullable = false)
     private Categoria categoria;
 	@Column(nullable = false)
     private String dataCriacao;
@@ -29,7 +28,6 @@ public class Atendimento {
 	@Column(nullable = false)
 	private String descricao;
 	@ManyToOne
-	@Column(nullable = false)
 	private Atendente atendente;
 	@ManyToOne
     private Usuario usuario; //opcional
