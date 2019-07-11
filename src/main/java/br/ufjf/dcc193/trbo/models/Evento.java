@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,11 +15,16 @@ public class Evento {
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
+	@Column(nullable = false)
     private Atendimento atendimento;
+	@Column(nullable = false)
     private String data;
+	@Column(nullable = false)
     private String hora;
-    private String tipo; // Class tipo ? (entre: abertura, fechamento, alteração de Usuário, alteração de Categoria, alteração de Atendente, alteração de status e uma descrição textual
-    private String descricao; // Perguntar pro professor se faz parte do tipo.
+	@Column(nullable = false)
+    private String tipo; // entre: abertura, fechamento, alteração de Usuário, alteração de Categoria, alteração de Atendente, alteração de status e uma descrição textual
+	@Column(nullable = false)
+	private String descricao;
 
 	public Evento(){}
 

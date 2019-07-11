@@ -13,10 +13,15 @@ public class Usuario {
 	@Id
 	@GeneratedValue
     private Long id;
+	@Column(nullable = false)
     private String nomeCompleto;
+	@Column(nullable = false)
     private String setor;
+	@Column(nullable = false)
     private String codigoVinculo;
+	@Column(nullable = false)
     private String telefone;
+	@Column(nullable = false)
 	private String celular;
 	@Column(nullable=false)
     private String email;

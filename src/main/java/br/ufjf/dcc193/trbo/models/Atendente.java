@@ -12,12 +12,16 @@ import javax.persistence.Id;
 public class Atendente {
 	@Id
 	@GeneratedValue
-    private Long id;
+	private Long id;
+	@Column(nullable = false)
     private String nomeCompleto;
+	@Column(nullable = false)
     private String codigoAcesso;
+	@Column(nullable = false)
     private String telefone;
+	@Column(nullable = false)
 	private String celular;
-	@Column(unique=true)
+	@Column(nullable=false, unique=true)
     private String email;
 
 	public Long getId() {

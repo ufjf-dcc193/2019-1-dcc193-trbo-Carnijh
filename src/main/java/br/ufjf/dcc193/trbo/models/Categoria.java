@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.trbo.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,9 @@ public class Categoria {
 	@Id
 	@GeneratedValue
     private Long id;
+	@Column(nullable = false)
     private String titulo;
+	@Column(nullable = false)
     private String descricao;
 
 	public Long getId() {

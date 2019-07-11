@@ -41,7 +41,7 @@
             <div class="form-group">
                 <div th:if="${atendentes != null}">
                     <label for="atendente">Atendente: </label>
-                    <select class="custom-select" name="atendente">
+                    <select class="custom-select" name="atendente" required>
                         <option selected>Escolha ...</option>
                         <option th:each="atendente : ${atendentes}" th:value="${atendente.id}"><span
                                 th:text="${atendente.nomeCompleto}">Nome completo</span></option>
@@ -59,7 +59,7 @@
 
                 <div th:if="${categorias != null}">
                     <label for="categoria">Categoria: </label>
-                    <select class="custom-select" name="categoria">
+                    <select class="custom-select" name="categoria" required>
                         <option selected>Escolha ...</option>
                         <option th:each="categoria : ${categorias}" th:value="${categoria.id}"><span
                                 th:text="${categoria.titulo}">Título</span></option>
@@ -68,7 +68,7 @@
 
                 <div th:if="${status != null}">
                     <label for="status">Status: </label>
-                    <select class="custom-select" name="status">
+                    <select class="custom-select" name="status" required>
                         <option selected>Escolha ...</option>
                         <option value="Em revisão">Em revisão</option>
                         <option value="Aberto">Aberto</option>
@@ -80,7 +80,7 @@
             </div>
             <div class="form-group">
                 <label for="motivo">Motivo da alteração: </label>
-                <textarea class="form-control" name="motivo"></textarea>
+                <textarea class="form-control" name="motivo" required></textarea>
             </div>
 
             <input type="hidden" th:value="${atendimento.id}" name="atendimentoId">
