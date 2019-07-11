@@ -36,12 +36,26 @@
     </nav>
     <br>
     <div class="container" th:with="atendimentosCadastrados = ${#lists.isEmpty(atendimentos)}">
-        <h1>Lista de Atendimentos</h1>
+        <div>
+            <h1>
+                <div th:if="${t}">Lista atendimentos</div>
+                <div th:if="${u}">Lista atendimentos de usuário - <span th:text="${u.nomeCompleto}">Nome</span></div>
+                <div th:if="${c}">Lista atendimentos não fechados de categoria - <span th:text="${c.titulo}">Titulo</span></div>
+                <div th:if="${a}">Lista atendimentos não fechados de atendente - <span th:text="${a.nomeCompleto}">Nome</span></div>
+                <div th:if="${f}">Lista atendimentos fechados</div>
+            </h1>
+        </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                       <a class="nav-link" href="/atendimento/listar.html">Todos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownUsuario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownUsuario">
+                            <a class="dropdown-item" th:each="usuario : ${usuarios}" th:href="@{/atendimento/listar.html/usuario/{id}(id=${usuario.id})}"><span th:text="${usuario.nomeCompleto}">usuario</span></a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="dropdownCategoria" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoria</a>
@@ -64,7 +78,10 @@
         <div th:if="${atendimentosCadastrados}">
             <p>Não há atendimentos cadastrados.</p>
         </div>
+        <br>
         <div class="row" th:unless="${atendimentosCadastrados}">
+            <h4>Total: <span th:text="${#lists.size(atendimentos)}"></span></h4>
+            <br>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>

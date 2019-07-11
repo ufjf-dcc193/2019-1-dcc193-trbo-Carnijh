@@ -3,7 +3,6 @@ package br.ufjf.dcc193.trbo.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -91,6 +90,10 @@ public class AtendimentoController {
             List<Atendimento> listaAtendimentos = atendimentoRepo.findAll();
             List<Categoria> listaCategorias = categoriaRepo.findAll();
             List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
             if (listaAtendimentos != null) {
                 model.addAttribute("atendimentos", listaAtendimentos);
             }
@@ -100,25 +103,56 @@ public class AtendimentoController {
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
+            model.addAttribute("t", true);
             return "atendimento/listar.html";
         }
         return "redirect:/index.html";
     }
 
-    // LISTA ATENDIMENTOS POR ATENDENTE
-    @RequestMapping("/atendimento/listar.html/atendente/{id}")
-    public String listarByAtendente(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+    // LISTA ATENDIMENTOS POR USUÁRIO
+    @RequestMapping("/atendimento/listar.html/usuario/{id}")
+    public String listarByUsuario(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             List<Categoria> listaCategorias = categoriaRepo.findAll();
             List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
             if (listaAtendentes != null) {
                 model.addAttribute("atendentes", listaAtendentes);
             }
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
-            Optional<Atendente> atendenteAux = atendenteRepo.findById(id);
-            Atendente atendente = atendenteAux.orElse(new Atendente());
+            Usuario usuario = usuarioRepo.findById(id).get();
+            List<Atendimento> atendimentos = atendimentoRepo.findByUsuario(usuario);
+            if (atendimentos != null) {
+                model.addAttribute("atendimentos", atendimentos);
+            }
+            model.addAttribute("u", usuario);
+            return "atendimento/listar.html";
+        }
+        return "redirect:/index.html";
+    }
+
+    // LISTA ATENDIMENTOS NÃO FECHADOS POR ATENDENTE
+    @RequestMapping("/atendimento/listar.html/atendente/{id}")
+    public String listarByAtendente(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute("atendenteLogado") != null) {
+            List<Categoria> listaCategorias = categoriaRepo.findAll();
+            List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
+            if (listaAtendentes != null) {
+                model.addAttribute("atendentes", listaAtendentes);
+            }
+            if (listaCategorias != null) {
+                model.addAttribute("categorias", listaCategorias);
+            }
+            Atendente atendente = atendenteRepo.findById(id).get();
             List<Atendimento> atendimentos = atendimentoRepo.findByAtendenteAndStatus(atendente, "Em revisão");
             List<Atendimento> atendimentos2 = atendimentoRepo.findByAtendenteAndStatus(atendente, "Aberto");
             List<Atendimento> atendimentos3 = atendimentoRepo.findByAtendenteAndStatus(atendente, "Bloqueado");
@@ -129,25 +163,29 @@ public class AtendimentoController {
             if (atendimentos != null) {
                 model.addAttribute("atendimentos", atendimentos);
             }
+            model.addAttribute("a", atendente);
             return "atendimento/listar.html";
         }
         return "redirect:/index.html";
     }
 
-    // LISTA ATENDIMENTOS POR CATEGORIA
+    // LISTA ATENDIMENTOS NÃO FECHADOS POR CATEGORIA
     @RequestMapping("/atendimento/listar.html/categoria/{id}")
     public String listarByCategoria(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             List<Categoria> listaCategorias = categoriaRepo.findAll();
             List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
             if (listaAtendentes != null) {
                 model.addAttribute("atendentes", listaAtendentes);
             }
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
-            Optional<Categoria> categoriaAux = categoriaRepo.findById(id);
-            Categoria categoria = categoriaAux.orElse(new Categoria());
+            Categoria categoria = categoriaRepo.findById(id).get();
             List<Atendimento> atendimentos = atendimentoRepo.findByCategoriaAndStatus(categoria, "Em revisão");
             List<Atendimento> atendimentos2 = atendimentoRepo.findByCategoriaAndStatus(categoria, "Aberto");
             List<Atendimento> atendimentos3 = atendimentoRepo.findByCategoriaAndStatus(categoria, "Bloqueado");
@@ -158,6 +196,7 @@ public class AtendimentoController {
             if (atendimentos != null) {
                 model.addAttribute("atendimentos", atendimentos);
             }
+            model.addAttribute("c", categoria);
             return "atendimento/listar.html";
         }
         return "redirect:/index.html";
@@ -169,6 +208,10 @@ public class AtendimentoController {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             List<Categoria> listaCategorias = categoriaRepo.findAll();
             List<Atendente> listaAtendentes = atendenteRepo.findAll();
+            List<Usuario> listaUsuarios = usuarioRepo.findAll();
+            if (listaUsuarios != null) {
+                model.addAttribute("usuarios", listaUsuarios);
+            }
             if (listaAtendentes != null) {
                 model.addAttribute("atendentes", listaAtendentes);
             }
@@ -179,6 +222,7 @@ public class AtendimentoController {
             if (listaAtendimentos != null) {
                 model.addAttribute("atendimentos", listaAtendimentos);
             }
+            model.addAttribute("f", true);
             return "atendimento/listar.html";
         }
         return "redirect:/index.html";
