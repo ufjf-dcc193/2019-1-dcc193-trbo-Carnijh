@@ -27,7 +27,7 @@ public class CategoriaController {
     @RequestMapping("/categoria/criar.html")
     public String criar(HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            return "/categoria/criar.html";
+            return "categoria/criar.html";
         }
         return "redirect:/index.html";
     }
@@ -61,7 +61,7 @@ public class CategoriaController {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Categoria categoria = categoriaRepo.findById(id).get();
             model.addAttribute("categoria", categoria);
-            return "/categoria/editar.html";
+            return "categoria/editar.html";
         }
         return "redirect:/index.html";
     }

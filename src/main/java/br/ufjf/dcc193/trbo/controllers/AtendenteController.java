@@ -26,7 +26,7 @@ public class AtendenteController {
     // CHAMA TELA CRIAR ATENDENTE
     @RequestMapping("/atendente/criar.html")
     public String criar() {
-        return "/atendente/criar.html";
+        return "atendente/criar.html";
     }
 
     // CRIA ATENDENTE
@@ -55,7 +55,7 @@ public class AtendenteController {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Atendente atendente = atendenteRepo.findById(id).get();
             model.addAttribute("atendente", atendente);
-            return "/atendente/editar.html";
+            return "atendente/editar.html";
         }
         return "redirect:/index.html";
     }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.ufjf.dcc193.trbo.models.Atendente;
 import br.ufjf.dcc193.trbo.repositorys.AtendenteRepository;
@@ -34,14 +33,14 @@ public class HomeController {
             request.getSession().setAttribute("atendenteLogado", atendente);
             return "redirect:/menu.html";
         }
-        return "/index.html";
+        return "index.html";
     }
 
     // CHAMA TELA MENU
     @RequestMapping("/menu.html")
     public String menu(HttpServletRequest request) {
         if(request.getSession().getAttribute("atendenteLogado") != null){
-            return "/menu.html";
+            return "menu.html";
         }
         return "redirect:/index.html";
     }

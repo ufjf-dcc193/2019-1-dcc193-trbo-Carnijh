@@ -54,7 +54,7 @@ public class AtendimentoController {
             if (listaCategorias != null) {
                 model.addAttribute("categorias", listaCategorias);
             }
-            return "/atendimento/criar.html";
+            return "atendimento/criar.html";
         }
         return "redirect:/index.html";
     }
@@ -234,7 +234,7 @@ public class AtendimentoController {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Atendimento atendimento = atendimentoRepo.findById(id).get();
             model.addAttribute("atendimento", atendimento);
-            return "/atendimento/detalhar.html";
+            return "atendimento/detalhar.html";
         }
         return "redirect:/index.html";
     }
@@ -247,7 +247,7 @@ public class AtendimentoController {
             List<Usuario> usuarios = usuarioRepo.findAll();
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("usuarios", usuarios);
-            return "/atendimento/editar.html";
+            return "atendimento/editar.html";
         }
         return "redirect:/index.html";
     }
@@ -301,7 +301,7 @@ public class AtendimentoController {
             List<Atendente> atendentes = atendenteRepo.findAll();
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("atendentes", atendentes);
-            return "/atendimento/editar.html";
+            return "atendimento/editar.html";
         }
         return "redirect:/index.html";
     }
@@ -347,7 +347,7 @@ public class AtendimentoController {
             List<Categoria> categorias = categoriaRepo.findAll();
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("categorias", categorias);
-            return "/atendimento/editar.html";
+            return "atendimento/editar.html";
         }
         return "redirect:/index.html";
     }
@@ -392,7 +392,7 @@ public class AtendimentoController {
             Atendimento atendimento = atendimentoRepo.findById(id).get();
             model.addAttribute("atendimento", atendimento);
             model.addAttribute("status", true);
-            return "/atendimento/editar.html";
+            return "atendimento/editar.html";
         }
         return "redirect:/index.html";
     }

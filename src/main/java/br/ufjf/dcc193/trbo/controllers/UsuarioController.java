@@ -30,7 +30,7 @@ public class UsuarioController {
     @RequestMapping("/usuario/criar.html")
     public String criar(HttpServletRequest request) {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
-            return "/usuario/criar.html";
+            return "usuario/criar.html";
         }
         return "redirect:/index.html";
     }
@@ -64,7 +64,7 @@ public class UsuarioController {
         if (request.getSession().getAttribute("atendenteLogado") != null) {
             Usuario usuario = usuarioRepo.findById(id).get();
             model.addAttribute("usuario", usuario);
-            return "/usuario/editar.html";
+            return "usuario/editar.html";
         }
         return "redirect:/index.html";
     }
